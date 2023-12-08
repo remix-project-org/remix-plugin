@@ -93,11 +93,12 @@ export abstract class ElectronPlugin extends Plugin {
         this.loaded = false
         throw err;
       }
-      this.emit('loaded', this.name)
+      
       if (methods) {
         this.profile.methods = methods
-        this.call('manager', 'updateProfile', this.profile)
+        await this.call('manager', 'updateProfile', this.profile)
       }
+      this.emit('loaded', this.name)
     } else {
       // If there is a broken connection we want send back the handshake to the plugin client
       return this.callPluginMethod('handshake', [this.profile.name])
