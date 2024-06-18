@@ -48,7 +48,7 @@ Remix plugin offers a set of common APIs for plugins to implement. This set of A
 
 
 
-> The first goal of **remix plugin** is to enable a plugin to work in the envrionments of multiple engines. If a plugin has dependancies on other plugins, each engine must implement these dependancies.
+> The first goal of **remix plugin** is to enable a plugin to work in the environments of multiple engines. If a plugin has dependencies on other plugins, each engine must implement these dependencies.
 
 
 # Contribute
@@ -69,7 +69,7 @@ Open your browser on `http://localhost:4211/`.
 
 
 ## Build
-This uses nx's affected:build to only update what has been changes since last build.
+This uses nx's affected:build to only update what has been changed since last build.
 ```
 npm run build
 ```
@@ -85,7 +85,7 @@ npx nx build engine-vscode --with-deps
 ```
 
 ## Test
-This uses nx's affected:test to only update what has been changes since last test.
+This uses nx's affected:test to only update what has been changed since last test.
 ```
 npm test
 ```
