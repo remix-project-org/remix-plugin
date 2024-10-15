@@ -214,7 +214,7 @@ async function getWebviewContent(url: string, profile: Profile, options: Webview
             }
       });
       
-      pframe.setAttribute('sandbox', 'allow-popups allow-scripts allow-same-origin allow-downloads allow-forms allow-top-navigation')
+      pframe.setAttribute('sandbox', 'allow-popups allow-scripts allow-same-origin allow-downloads allow-forms allow-top-navigation allow-popups-to-escape-sandbox')
       pframe.setAttribute('seamless', 'true')
       pframe.src = '${serverUri}?r=${Math.random()}'
       pframe.setAttribute('id', 'plugin-${profile.name}')
