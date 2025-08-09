@@ -6,6 +6,7 @@ export interface IFileSystem {
     currentFileChanged: (file: string) => void
     fileSaved: (file: string) => void
     fileAdded: (file: string) => void
+    folderAdded: (file: string) => void
     fileRemoved: (file: string) => void
     fileClosed: (file: string) => void
     noFileSelected: ()=> void
@@ -30,6 +31,10 @@ export interface IFileSystem {
     remove(path: string): void
     /** Get the name of the file currently focused if any */
     getCurrentFile(): string
+    /** close all files */
+    closeAllFiles(): void
+    /** close a file */
+    closeFile(): void
     // Old API
     /** @deprecated Use readdir */
     getFolder(path: string): Folder

@@ -1,8 +1,9 @@
 import { filSystemProfile, IFileSystem } from '@remixproject/plugin-api'
 import { MethodApi } from '@remixproject/plugin-utils'
-import { window, workspace, Uri, commands } from 'vscode'
+import { window, workspace, Uri, commands, ViewColumn } from 'vscode'
 import { CommandPlugin } from './command'
 import { absolutePath, relativePath } from '../util/path'
+import { getOpenedTextEditor } from '../util/editor'
 
 export class FileManagerPlugin extends CommandPlugin implements MethodApi<IFileSystem> {
   constructor() {
@@ -12,7 +13,7 @@ export class FileManagerPlugin extends CommandPlugin implements MethodApi<IFileS
   async open(path: string): Promise<void> {
     const absPath = absolutePath(path)
     const uri = Uri.file(absPath)
-    return commands.executeCommand('vscode.open', uri)
+    return commands.executeCommand('vscode.open', uri, { viewColumn: ( getOpenedTextEditor()?.viewColumn || ViewColumn.One ) })
   }
   /** Set the content of a specific file */
   async writeFile(path: string, data: string): Promise<void> {
@@ -20,6 +21,7 @@ export class FileManagerPlugin extends CommandPlugin implements MethodApi<IFileS
     const uri = Uri.file(absPath)
     const encoder = new TextEncoder()
     const uint8Array = encoder.encode(data)
+    this.logMessage(' is modifying ' + path)
     return workspace.fs.writeFile(uri, Uint8Array.from(uint8Array))
   }
   /** Return the content of a specific file */
@@ -32,12 +34,14 @@ export class FileManagerPlugin extends CommandPlugin implements MethodApi<IFileS
   async remove(path: string): Promise<void> {
     const absPath = absolutePath(path)
     const uri = Uri.file(absPath)
+    this.logMessage(' is removing ' + path)
     return workspace.fs.delete(uri)
   }
   /** Change the path of a file */
   async rename(oldPath: string, newPath: string): Promise<void> {
     const source = Uri.file(absolutePath(oldPath))
     const target = Uri.file(absolutePath(newPath))
+    this.logMessage(' is renaming ' + oldPath + ' to ' + newPath)
     return workspace.fs.rename(source, target)
   }
   /** Upsert a file with the content of the source file */
@@ -49,6 +53,7 @@ export class FileManagerPlugin extends CommandPlugin implements MethodApi<IFileS
   /** Create a directory */
   async mkdir(path: string): Promise<void> {
     const uri = Uri.file(absolutePath(path))
+    this.logMessage(' is creating ' + path)
     return workspace.fs.createDirectory(uri)
   }
   /** Get the list of files in the directory */
@@ -59,8 +64,22 @@ export class FileManagerPlugin extends CommandPlugin implements MethodApi<IFileS
   }
 
   async getCurrentFile() {
-    const fileName = window.activeTextEditor ? window.activeTextEditor.document.fileName : undefined
+    const fileName = (getOpenedTextEditor()?.document?.fileName || undefined)
+    if(!fileName) throw new Error("No current file found.")
     return relativePath(fileName)
+  }
+
+  async closeFile() {
+    return null
+  }
+
+  async closeAllFiles() {
+    return null
+  }
+
+  logMessage(message){
+    if(this.currentRequest && this.currentRequest.from)
+      window.showInformationMessage(this.currentRequest.from + message);
   }
   // ------------------------------------------
   // Legacy API. To be removed.
