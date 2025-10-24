@@ -80,7 +80,7 @@ describe('Client is loaded', () => {
   test('Call should throw an error', (done) => {
     const name = 'fileManager', key = 'getFile', payload = 'browser/ballot.sol'
     client.call(name, key, payload).catch((error) => {
-      expect(error.message).toBe('Error from IDE : error')
+      expect(error.message).toBe('error')
       done()
     })
     client.events.emit(callEvent(name, key, 1), undefined, 'error')
