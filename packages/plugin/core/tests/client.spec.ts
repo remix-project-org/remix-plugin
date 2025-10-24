@@ -43,7 +43,7 @@ describe('Client is not loaded yet', () => {
 
   test('Call should throw when client is not loaded', async () => {
     expect(() => client.call('fileManager', 'getFile', 'browser/ballot.sol'))
-      .toThrow('Not connected to the IDE. Make sure the port of the IDE is 8080')
+      .toThrow('Not connected to the IDE. If you are using a local IDE, make sure to add devMode in client options')
   })
 })
 
@@ -80,7 +80,7 @@ describe('Client is loaded', () => {
   test('Call should throw an error', (done) => {
     const name = 'fileManager', key = 'getFile', payload = 'browser/ballot.sol'
     client.call(name, key, payload).catch((error) => {
-      expect(error.message).toBe('Error from IDE : error')
+      expect(error.message).toBe('error')
       done()
     })
     client.events.emit(callEvent(name, key, 1), undefined, 'error')
