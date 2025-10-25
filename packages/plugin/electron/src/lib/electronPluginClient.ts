@@ -10,7 +10,12 @@ export class ElectronPluginClientConnector implements ClientConnector {
 
     /** Send a message to the engine */
     send(message: Partial<Message>) {
-        this.browserWindow.webContents.send(this.profile.name + ':send', message)
+        try{
+            this.browserWindow.webContents.send(this.profile.name + ':send', message)
+        }catch(e){
+            console.log(`Error sending message to ${this.profile.name} plugin: ${e}`)
+            console.log(`Message: ${message}`)
+        }
     }
 
     /** Listen to message from the engine */

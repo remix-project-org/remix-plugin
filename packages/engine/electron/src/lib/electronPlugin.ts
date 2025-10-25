@@ -1,37 +1,47 @@
-import type { Profile, Message } from '@remixproject/plugin-utils'
+import type { Profile, Message } from '@remixproject/plugin-utils';
 import { Plugin } from '@remixproject/engine';
+import { EventEmitter } from 'events';
 
 export abstract class ElectronPlugin extends Plugin {
-  protected loaded: boolean
-  protected id = 0
-  protected pendingRequest: Record<number, (result: any, error: Error | string) => void> = {}
+  protected loaded: boolean;
+  protected connected: boolean;
+  public events = new EventEmitter();
+  protected id = 0;
+  protected pendingRequest: Record<
+    number,
+    (result: any, error: Error | string) => void
+  > = {};
   protected api: {
-    send: (message: Partial<Message>) => void
-    on: (cb: (event: any, message: any) => void) => void
-  }
+    send: (message: Partial<Message>) => void;
+    on: (cb: (event: any, message: any) => void) => void;
+  };
 
-  profile: Profile
+  profile: Profile;
   constructor(profile: Profile) {
-    super(profile)
-    this.loaded = false
+    super(profile);
+    this.loaded = false;
+    this.connected = false;
 
-    if(!window.electronAPI) throw new Error('ElectronPluginConnector requires window.api')
-    if(!window.electronAPI.plugins) throw new Error('ElectronPluginConnector requires window.api.plugins')
+    if (!window.electronAPI)
+      throw new Error('ElectronPluginConnector requires window.api');
+    if (!window.electronAPI.plugins)
+      throw new Error('ElectronPluginConnector requires window.api.plugins');
 
     window.electronAPI.plugins.find((plugin: any) => {
-      if(plugin.name === profile.name){
-        this.api = plugin
-        return true
+      if (plugin.name === profile.name) {
+        this.api = plugin;
+        return true;
       }
-    })
+    });
 
-    if(!this.api) throw new Error(`ElectronPluginConnector requires window.api.plugins.${profile.name} to be defined in preload.ts`)
+    if (!this.api)
+      throw new Error(
+        `ElectronPluginConnector requires window.api.plugins.${profile.name} to be defined in preload.ts`
+      );
 
     this.api.on((event: any, message: any) => {
-      this.getMessage(message)
-    })
-
-
+      this.getMessage(message);
+    });
   }
 
   /**
@@ -39,19 +49,17 @@ export abstract class ElectronPlugin extends Plugin {
    * @param message the message passed to the plugin
    */
   protected send(message: Partial<Message>): void {
-    if(this.loaded)
-      this.api.send(message)
+    if (this.loaded) this.api.send(message);
   }
   /**
    * Open connection with the plugin
    * @param name The name of the plugin should connect to
    */
   protected async connect(name: string) {
-    const connected = await window.electronAPI.activatePlugin(name)
-    if(connected && !this.loaded){
-      this.handshake()
+    const connected = await window.electronAPI.activatePlugin(name);
+    if (connected && !this.loaded) {
+      this.handshake();
     }
-    
   }
   /** Close connection with the plugin */
   protected disconnect(): any | Promise<any> {
@@ -59,49 +67,64 @@ export abstract class ElectronPlugin extends Plugin {
   }
 
   async activate() {
-    await this.connect(this.profile.name)
-    return super.activate()
+    await this.connect(this.profile.name);
+    return super.activate();
   }
 
   async deactivate() {
-    this.loaded = false
-    await this.disconnect()
-    return super.deactivate()
+    this.loaded = false;
+    await this.disconnect();
+    return super.deactivate();
   }
 
   /** Call a method from this plugin */
   protected callPluginMethod(key: string, payload: any[] = []): Promise<any> {
-    const action = 'request'
-    const id = this.id++
-    const requestInfo = this.currentRequest
-    const name = this.name
+    const action = 'request';
+    const id = this.id++;
+    const requestInfo = this.currentRequest;
+    const name = this.name;
     const promise = new Promise((res, rej) => {
-      this.pendingRequest[id] = (result: any[], error: Error | string) => error ? rej (error) : res(result)
-    })
-    this.send({ id, action, key, payload, requestInfo, name })
-    return promise
+      this.pendingRequest[id] = (result: any[], error: Error | string) =>
+        error ? rej(error) : res(result);
+    });
+    this.send({ id, action, key, payload, requestInfo, name });
+    return promise;
   }
 
   /** Perform handshake with the client if not loaded yet */
   protected async handshake() {
     if (!this.loaded) {
-      this.loaded = true
+      this.loaded = true;
       let methods: string[];
       try {
-        methods = await this.callPluginMethod('handshake', [this.profile.name])
+        methods = await this.callPluginMethod('handshake', [this.profile.name]);
       } catch (err) {
-        this.loaded = false
+        this.loaded = false;
         throw err;
       }
-      this.emit('loaded', this.name)
+
       if (methods) {
-        this.profile.methods = methods
-        this.call('manager', 'updateProfile', this.profile)
+        this.profile.methods = methods;
+        await this.call('manager', 'updateProfile', this.profile);
       }
+      this.connected = true;
+      this.events.emit('connected');
+      this.emit('loaded', this.name);
     } else {
       // If there is a broken connection we want send back the handshake to the plugin client
-      return this.callPluginMethod('handshake', [this.profile.name])
+      return this.callPluginMethod('handshake', [this.profile.name]);
     }
+  }
+
+  // Wait until this connection is settled
+  public onConnect(cb?: () => void): Promise<void> {
+    return new Promise((res, rej) => {
+      const loadFn = () => {
+        res();
+        if (cb) cb();
+      };
+      this.connected ? loadFn() : this.events.once('connected', () => loadFn());
+    });
   }
 
   /**
@@ -111,64 +134,74 @@ export abstract class ElectronPlugin extends Plugin {
   protected async getMessage(message: Message) {
     // Check for handshake request from the client
     if (message.action === 'request' && message.key === 'handshake') {
-      return this.handshake()
+      return this.handshake();
     }
 
     switch (message.action) {
       // Start listening on an event
       case 'on':
       case 'listen': {
-        const { name, key } = message
-        const action = 'notification'
-        this.on(name, key, (...payload: any[]) => this.send({ action, name, key, payload }))
-        break
+        const { name, key } = message;
+        const action = 'notification';
+        this.on(name, key, (...payload: any[]) =>
+          this.send({ action, name, key, payload })
+        );
+        break;
       }
       case 'off': {
-        const { name, key } = message
-        this.off(name, key)
-        break
+        const { name, key } = message;
+        this.off(name, key);
+        break;
       }
       case 'once': {
-        const { name, key } = message
-        const action = 'notification'
-        this.once(name, key, (...payload: any) => this.send({ action, name, key, payload }))
-        break
+        const { name, key } = message;
+        const action = 'notification';
+        this.once(name, key, (...payload: any) =>
+          this.send({ action, name, key, payload })
+        );
+        break;
       }
       // Emit an event
       case 'emit':
       case 'notification': {
-        if (!message.payload) break
-        this.emit(message.key, ...message.payload)
-        break
+        if (!message.payload) break;
+        this.emit(message.key, ...message.payload);
+        break;
       }
       // Call a method
       case 'call':
       case 'request': {
-        const action = 'response'
+        const action = 'response';
         try {
-          const payload = await this.call(message.name, message.key, ...message.payload)
-          const error: any = undefined
-          this.send({ ...message, action, payload, error })
+          const payload = await this.call(
+            message.name,
+            message.key,
+            ...message.payload
+          );
+          const error: any = undefined;
+          this.send({ ...message, action, payload, error });
         } catch (err) {
-          const payload: any = undefined
-          const error = err.message || err
-          this.send({ ...message, action, payload, error })
+          const payload: any = undefined;
+          const error = err.message || err;
+          this.send({ ...message, action, payload, error });
         }
-        break
+        break;
       }
       case 'cancel': {
-        const payload = this.cancel(message.name, message.key)
+        const payload = this.cancel(message.name, message.key);
         break;
       }
       // Return result from exposed method
       case 'response': {
-        const { id, payload, error } = message
-        this.pendingRequest[id](payload, error)
-        delete this.pendingRequest[id]
-        break
+        const { id, payload, error } = message;
+        this.pendingRequest[id](payload, error);
+        delete this.pendingRequest[id];
+        break;
       }
       default: {
-        throw new Error('Message should be a notification, request or response')
+        throw new Error(
+          'Message should be a notification, request or response'
+        );
       }
     }
   }

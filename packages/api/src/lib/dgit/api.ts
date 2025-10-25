@@ -7,6 +7,7 @@ export interface IDgitSystem {
         commit(cmd: any): string;
         status(cmd: any): any[];
         rm(cmd: any): string;
+        reset(cmd: any): string;
         log(cmd: any): any[];
         lsfiles(cmd: any): any[];
         readblob(cmd: any): { oid: string, blob: Uint8Array }
