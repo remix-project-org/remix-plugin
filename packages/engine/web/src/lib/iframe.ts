@@ -73,7 +73,7 @@ disconnect() {
     if (this.iframe.contentWindow) {
       throw new Error(`${this.name} plugin is already rendered`)
     }
-    this.iframe.setAttribute('sandbox', 'allow-popups allow-scripts allow-same-origin allow-forms allow-top-navigation')
+    this.iframe.setAttribute('sandbox', 'allow-popups allow-scripts allow-same-origin allow-forms allow-top-navigation allow-popups-to-escape-sandbox')
     this.iframe.setAttribute('seamless', 'true')
     this.iframe.setAttribute('id', `plugin-${this.name}`)
     this.iframe.src = this.url
