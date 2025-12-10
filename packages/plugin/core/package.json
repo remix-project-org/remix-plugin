@@ -1,6 +1,6 @@
 {
-  "name": "@remixproject/plugin",
-  "version": "0.3.37",
+  "name": "@remix-project/plugin",
+  "version": "0.3.44",
   "dependencies": {
     "events": "3.2.0"
   },

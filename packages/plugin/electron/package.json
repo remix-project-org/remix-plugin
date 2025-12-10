@@ -1,6 +1,6 @@
 {
-  "name": "@remixproject/plugin-electron",
-  "version": "0.3.37",
+  "name": "@remix-project/plugin-electron",
+  "version": "0.3.44",
   "homepage": "https://github.com/ethereum/remix-plugin/tree/master/packages/plugin/iframe#readme",
   "repository": {
     "type": "git",
