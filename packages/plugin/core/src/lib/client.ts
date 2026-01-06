@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events'
-import { RemixApi, remixProfiles } from '@remixproject/plugin-api'
-import { callEvent, listenEvent, createService, activateService, GetPluginService, Profile } from '@remixproject/plugin-utils'
+import { RemixApi, remixProfiles } from '@remix-project/plugin-api'
+import { callEvent, listenEvent, createService, activateService, GetPluginService, Profile } from '@remix-project/plugin-utils'
 import type {
   Api,
   PluginRequest,
@@ -13,7 +13,7 @@ import type {
   ProfileMap,
   IPluginService,
   PluginBase
-} from '@remixproject/plugin-utils'
+} from '@remix-project/plugin-utils'
 
 export interface PluginDevMode {
   /** Port for localhost */
@@ -131,11 +131,19 @@ export class PluginClient<T extends Api = any, App extends ApiMap = RemixApi> im
       const callName = callEvent(name, key, this.id)
       this.events.once(callName, (result: any, error) => {
         error
-          ? rej(new Error(`Error from IDE : ${error}`))
+          ? rej(new Error(error))
           : res(result)
       })
       this.events.emit('send', { action: 'request', name, key, payload, id: this.id })
     })
+  }
+
+  public cancel<Name extends Extract<keyof App, string>, Key extends MethodKey<App[Name]>>(
+    name: Name,
+    key?: Key | '',
+  ): void {
+    if (!this.isLoaded) handleConnectionError(this.options.devMode)
+    this.events.emit('send', { action: 'cancel', name, key })
   }
 
   /** Listen on event from another plugin */

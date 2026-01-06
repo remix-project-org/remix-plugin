@@ -1,5 +1,5 @@
-import type { Message, Api, ApiMap } from '@remixproject/plugin-utils';
-import { IRemixApi } from '@remixproject/plugin-api';
+import type { Message, Api, ApiMap } from '@remix-project/plugin-utils';
+import { IRemixApi } from '@remix-project/plugin-api';
 import {
   ClientConnector,
   connectClient,
@@ -10,7 +10,7 @@ import {
   isPluginMessage,
   PluginOptions,
   checkOrigin
-} from '@remixproject/plugin'
+} from '@remix-project/plugin'
 
 import { listenOnThemeChanged } from './theme'
 
@@ -67,6 +67,7 @@ export class IframeConnector implements ClientConnector {
  * const client = createClient(new MyPlugin())
  * ```
  */
+
 export const createClient = <
   P extends Api,
   App extends ApiMap = Readonly<IRemixApi>

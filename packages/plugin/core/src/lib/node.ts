@@ -1,5 +1,5 @@
 import { PluginClient } from "./client"
-import { getRootPath } from '@remixproject/plugin-utils'
+import { getRootPath } from '@remix-project/plugin-utils'
 
 /**
  * Access a service of an external plugin

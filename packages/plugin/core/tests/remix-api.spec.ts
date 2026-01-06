@@ -1,4 +1,4 @@
-import { remixProfiles } from '@remixproject/plugin-api'
+import { remixProfiles } from '@remix-project/plugin-api'
 import { createConnectorClient } from '../src'
 
 describe('Remix Api', () => {

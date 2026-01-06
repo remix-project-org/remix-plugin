@@ -1,5 +1,5 @@
-import { PluginClient, PluginOptions } from '@remixproject/plugin'
-import { Theme } from "@remixproject/plugin-api"
+import { PluginClient, PluginOptions } from '@remix-project/plugin'
+import { Theme } from "@remix-project/plugin-api"
 
 /** Start listening on theme changed */
 export async function listenOnThemeChanged(client: PluginClient, options?: Partial<PluginOptions<any>>) {
@@ -17,6 +17,6 @@ export async function listenOnThemeChanged(client: PluginClient, options?: Parti
 
 
 function setTheme(cssLink: HTMLLinkElement, theme: Theme) {
-  cssLink.setAttribute('href', theme.url)
+  cssLink.setAttribute('href', theme.url.replace(/^http:/,"").replace(/^https:/,""))
   document.documentElement.style.setProperty('--theme', theme.quality)
 }

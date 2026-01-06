@@ -1,5 +1,5 @@
 import { ISettings } from './api'
-import { LibraryProfile } from '@remixproject/plugin-utils'
+import { LibraryProfile } from '@remix-project/plugin-utils'
 
 export const settingsProfile: LibraryProfile<ISettings> = {
   name: 'settings',

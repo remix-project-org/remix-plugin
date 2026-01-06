@@ -16,18 +16,20 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@remixproject/plugin-utils": ["packages/utils/src/index.ts"],
-      "@remixproject/plugin-api": ["packages/api/src/index.ts"],
-      "@remixproject/engine": ["packages/engine/core/src/index.ts"],
-      "@remixproject/engine-web": ["packages/engine/web/src/index.ts"],
-      "@remixproject/plugin": ["packages/plugin/core/src/index.ts"],
-      "@remixproject/plugin/ws": ["packages/plugin/ws/src/index.ts"],
-      "@remixproject/plugin-webview": ["packages/plugin/webview/src/index.ts"],
-      "@remixproject/plugin-webworker": [
+      "@remix-project/plugin-utils": ["packages/utils/src/index.ts"],
+      "@remix-project/plugin-api": ["packages/api/src/index.ts"],
+      "@remix-project/engine": ["packages/engine/core/src/index.ts"],
+      "@remix-project/engine-web": ["packages/engine/web/src/index.ts"],
+      "@remix-project/plugin": ["packages/plugin/core/src/index.ts"],
+      "@remix-project/plugin/ws": ["packages/plugin/ws/src/index.ts"],
+      "@remix-project/plugin-webview": ["packages/plugin/webview/src/index.ts"],
+      "@remix-project/plugin-webworker": [
         "packages/plugin/webworker/src/index.ts"
       ],
-      "@remixproject/plugin-theia": ["packages/plugin/theia/src/index.ts"],
-      "@remixproject/engine-theia": ["packages/engine/theia/src/index.ts"]
+      "@remix-project/plugin-theia": ["packages/plugin/theia/src/index.ts"],
+      "@remix-project/engine-theia": ["packages/engine/theia/src/index.ts"],
+      "@remix-project/engine-electron": ["packages/engine/electron/src/index.ts"],
+      "@remix-project/plugin-electron": ["packages/plugin/electron/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

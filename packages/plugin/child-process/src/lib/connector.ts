@@ -1,6 +1,6 @@
-import { ClientConnector, connectClient, applyApi, Client, PluginClient } from '@remixproject/plugin'
-import type { Message, Api, ApiMap } from '@remixproject/plugin-utils'
-import { IRemixApi } from '@remixproject/plugin-api'
+import { ClientConnector, connectClient, applyApi, Client, PluginClient } from '@remix-project/plugin'
+import type { Message, Api, ApiMap } from '@remix-project/plugin-utils'
+import { IRemixApi } from '@remix-project/plugin-api'
 
 
 export interface WS {
@@ -22,7 +22,13 @@ export class WebsocketConnector implements ClientConnector {
 
   /** Get messae from the engine */
   on(cb: (message: Partial<Message>) => void) {
-    this.websocket.on('message', (event) => cb(JSON.parse(event)))
+    this.websocket.on('message', (event) => {
+      try {
+        cb(JSON.parse(event)) 
+      } catch (e) {
+        console.error(e)
+      }
+    })
   }
 }
 

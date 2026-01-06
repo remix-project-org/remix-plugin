@@ -1,17 +1,17 @@
 # Engine vscode
 The **vscode engine** provides a list of connectors & plugins for a **plugin engine** that is built inside vscode.
 ```
-npm install @remixproject/engine-vscode
+npm install @remix-project/engine-vscode
 ```
 
 ## Setup
-You can use the remixproject engine to create a plugin system on top of a vscode extension.
+You can use the remix-project engine to create a plugin system on top of a vscode extension.
 For that you need to create an engine and start registering your plugins.
 
-> checkout [@remixproject/engine documentation](../core/README.md) for more details.
+> checkout [@remix-project/engine documentation](../core/README.md) for more details.
 
 ```typescript
-import { Engine, Manager } from '@remixproject/engine';
+import { Engine, Manager } from '@remix-project/engine';
 
 export async function activate(context: ExtensionContext) {
   const manager = new Manager();
@@ -20,15 +20,15 @@ export async function activate(context: ExtensionContext) {
 ```
 
 ## Build-in plugins
-`@remixproject/engine-vscode` comes with build-in plugins for `vscode`.
+`@remix-project/engine-vscode` comes with build-in plugins for `vscode`.
 
 ### webview
 The webview plugin opens a webview in the workspace and connects to it.
-The plugin must use [`@remixproject/plugin-webview`](../../plugin/webview/README.md) to be able to establish connection.
+The plugin must use [`@remix-project/plugin-webview`](../../plugin/webview/README.md) to be able to establish connection.
 
 ```typescript
-import { WebviewPlugin } from '@remixproject/engine-vscode'
-import { Engine, Manager } from '@remixproject/engine';
+import { WebviewPlugin } from '@remix-project/engine-vscode'
+import { Engine, Manager } from '@remix-project/engine';
 
 export async function activate(context: ExtensionContext) {
   const manager = new Manager();
@@ -62,8 +62,8 @@ The url can be :
 The terminal plugin gives access to the current terminal in vscode.
 
 ```typescript
-import { TerminalPlugin } from '@remixproject/engine-vscode'
-import { Engine, Manager } from '@remixproject/engine';
+import { TerminalPlugin } from '@remix-project/engine-vscode'
+import { Engine, Manager } from '@remix-project/engine';
 
 export async function activate(context: ExtensionContext) {
   const manager = new Manager();
@@ -82,8 +82,8 @@ export async function activate(context: ExtensionContext) {
 Provides access to the native window of vscode.
 
 ```typescript
-import { WindowPlugin } from '@remixproject/engine-vscode'
-import { Engine, Manager } from '@remixproject/engine';
+import { WindowPlugin } from '@remix-project/engine-vscode'
+import { Engine, Manager } from '@remix-project/engine';
 
 export async function activate(context: ExtensionContext) {
   const manager = new Manager();
@@ -100,8 +100,8 @@ export async function activate(context: ExtensionContext) {
 ### File Manager
 Provides access to the file system through vscode api.
 ```typescript
-import { FileManagerPlugin } from '@remixproject/engine-vscode'
-import { Engine, Manager } from '@remixproject/engine';
+import { FileManagerPlugin } from '@remix-project/engine-vscode'
+import { Engine, Manager } from '@remix-project/engine';
 
 export async function activate(context: ExtensionContext) {
   const manager = new Manager();
@@ -121,8 +121,8 @@ Remix's standard theme wrapper for vscode.
 Use this plugin to take advantage of the Remix's standard themes for your plugins.
 Otherwise, consider using [vscode's color api](https://code.visualstudio.com/api/references/theme-color) directly in your webview.
 ```typescript
-import { ThemePlugin } from '@remixproject/engine-vscode'
-import { Engine, Manager } from '@remixproject/engine';
+import { ThemePlugin } from '@remix-project/engine-vscode'
+import { Engine, Manager } from '@remix-project/engine';
 
 export async function activate(context: ExtensionContext) {
   const manager = new Manager();

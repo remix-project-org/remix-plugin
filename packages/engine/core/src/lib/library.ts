@@ -1,5 +1,5 @@
 import type { EventEmitter } from 'events'
-import type { Api, Profile, LibraryProfile, LocationProfile } from '@remixproject/plugin-utils'
+import type { Api, Profile, LibraryProfile, LocationProfile } from '@remix-project/plugin-utils'
 import { Plugin } from './abstract'
 
 export type LibraryApi<T extends Api, P extends Profile> = {

@@ -1,3 +1,3 @@
 # plugin-utils
 
-A simple utils library used by `@remixproject/engine` & `@remixproject/plugin`.
+A simple utils library used by `@remix-project/engine` & `@remix-project/plugin`.

@@ -3,10 +3,10 @@
   "compilerOptions": {
     "types": ["jest", "node"],
     "paths": {
-      "@remixproject/plugin-utils": ["packages/utils/src/index.ts"],
-      "@remixproject/plugin-api": ["packages/api/src/index.ts"],
-      "@remixproject/engine": ["packages/engine/core/src/index.ts"],
-      "@remixproject/plugin": ["packages/plugin/core/src/index.ts"]
+      "@remix-project/plugin-utils": ["packages/utils/src/index.ts"],
+      "@remix-project/plugin-api": ["packages/api/src/index.ts"],
+      "@remix-project/engine": ["packages/engine/core/src/index.ts"],
+      "@remix-project/plugin": ["packages/plugin/core/src/index.ts"]
     }
   }
 }

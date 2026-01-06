@@ -4,7 +4,7 @@
 
 The plugin manager can activate/deactivate plugins, and manages permissions between plugins.
 ```typescript
-import { PluginManager } from '@remixproject/engine';
+import { PluginManager } from '@remix-project/engine';
 
 const manager = new PluginManager()
 ```
@@ -13,7 +13,7 @@ const manager = new PluginManager()
 
 The engine manages the communication between plugins. It requires a `PluginManager`.
 ```typescript
-import { PluginManager, Engine } from '@remixproject/engine';
+import { PluginManager, Engine } from '@remix-project/engine';
 
 const manager = new PluginManager()
 const engine = new Engine()
@@ -25,7 +25,7 @@ We need to register a plugin before activating it. This is done by the `Engine`.
 
 > ⚠️ **IMPORTANT** You need to register the "manager" before beeing able to activate a plugin
 ```typescript
-import { PluginManager, Engine, Plugin } from '@remixproject/engine';
+import { PluginManager, Engine, Plugin } from '@remix-project/engine';
 
 const manager = new PluginManager()
 const engine = new Engine()

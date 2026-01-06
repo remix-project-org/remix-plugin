@@ -1,5 +1,5 @@
-import { PluginManager, Engine } from '@remixproject/engine'
-import { pluginManagerProfile } from "@remixproject/plugin-api"
+import { PluginManager, Engine } from '@remix-project/engine'
+import { pluginManagerProfile } from "@remix-project/plugin-api"
 import { WebsocketPlugin } from '../src'
 
 const profile = {

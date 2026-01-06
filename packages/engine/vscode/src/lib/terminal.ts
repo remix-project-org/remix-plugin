@@ -1,4 +1,4 @@
-import { Plugin } from "@remixproject/engine";
+import { Plugin } from "@remix-project/engine";
 import { window, Terminal, OutputChannel } from 'vscode';
 
 export interface TerminalOptions {

@@ -1,15 +1,14 @@
-version: 2
+version: 2.1
 jobs:
   remix-plugin:
     docker:
-        - image: circleci/node:10
-    environment:
+      - image: cimg/node:20.19.0-browsers
     working_directory: ~/repo
     steps:
       - checkout
-      - run: npm install
-      - run: npm run build
-      - run: npm run test
+      - run: yarn install
+      - run: yarn build
+      - run: yarn test
       
 workflows:
   version: 2

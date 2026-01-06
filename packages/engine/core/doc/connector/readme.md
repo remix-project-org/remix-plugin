@@ -38,7 +38,7 @@ export interface ClientConnector {
 ```
 
 ```typescript
-import { ClientConnector, createConnectorClient, PluginClient, Message } from '@remixproject/plugin'
+import { ClientConnector, createConnectorClient, PluginClient, Message } from '@remix-project/plugin'
 
 export class SocketIOConnector implements ClientConnector {
 
@@ -64,7 +64,7 @@ Checkout how to [publish your client connector on npm](client-connector.md).
 The `PluginConnector` is an abstract class to be extended: 
 
 ```typescript
-import { PluginConnector, Profile, ExternalProfile, Message } from '@remixproject/engine'
+import { PluginConnector, Profile, ExternalProfile, Message } from '@remix-project/engine'
 import io from 'socket.io-client';
 
 export class SocketIOPlugin extends PluginConnector {

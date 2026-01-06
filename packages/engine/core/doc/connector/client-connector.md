@@ -2,14 +2,14 @@
 
 ## Install
 ```bash
-npm install @remixproject/plugin@next
+npm install @remix-project/plugin@next
 ```
 
 ## Create your connector
 Create a file `index.ts`
 
 ```typescript
-import { ClientConnector, createConnectorClient, PluginClient, Message } from '@remixproject/plugin'
+import { ClientConnector, createConnectorClient, PluginClient, Message } from '@remix-project/plugin'
 
 export class SocketIOConnector implements ClientConnector {
 
@@ -42,7 +42,7 @@ npx tsc index --declaration
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "@remixproject/plugin": "next"
+    "@remix-project/plugin": "next"
   },
   "peerDependencies": {
     "socket.io": "^2.3.0"
@@ -51,7 +51,7 @@ npx tsc index --declaration
 ```
 
 Some notes here : 
-- We use `dependancies` for `@remixproject/plugin` as this is the base code for your connector.
+- We use `dependancies` for `@remix-project/plugin` as this is the base code for your connector.
 - We use `peerDependencies` for the library we wrap (here `socket.io`), as we want to let the user choose his version of it.
 
 ## Publish

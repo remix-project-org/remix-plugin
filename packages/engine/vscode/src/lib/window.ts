@@ -1,5 +1,5 @@
-import { Plugin, PluginOptions } from '@remixproject/engine'
-import { Profile } from '@remixproject/plugin-utils'
+import { Plugin } from '@remix-project/engine'
+import { Profile, PluginOptions } from '@remix-project/plugin-utils'
 import { window, QuickPickOptions, InputBoxOptions } from 'vscode'
 
 export const windowProfile: Profile = {

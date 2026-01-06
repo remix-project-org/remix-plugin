@@ -1,7 +1,7 @@
 import { IEditor } from './api'
-import { LibraryProfile } from '@remixproject/plugin-utils'
+import { LibraryProfile } from '@remix-project/plugin-utils'
 
 export const editorProfile: LibraryProfile<IEditor> = {
   name: 'editor',
-  methods: ['discardHighlight', 'highlight'],
+  methods: ['discardHighlight', 'highlight', 'addAnnotation', 'clearAnnotations', 'discardHighlightAt', 'gotoLine'],
 }

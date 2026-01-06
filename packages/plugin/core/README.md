@@ -4,14 +4,14 @@ This is the core library used to create a new external plugin.
 
 | Name                       | Latest Version       |
 | ---------------------------| :------------------: |
-| [@remixproject/plugin](.)  | [![badge](https://img.shields.io/npm/v/@remixproject/plugin.svg?style=flat-square)](https://www.npmjs.com/package/@remixproject/plugin) |
+| [@remix-project/plugin](.)  | [![badge](https://img.shields.io/npm/v/@remix-project/plugin.svg?style=flat-square)](https://www.npmjs.com/package/@remix-project/plugin) |
 
 Use this library if you want to create a plugin **for a new environment**.
 
 If you want to create a plugin in an existing envrionment, use the specific library. For example : 
-- Plugin on an iframe: [@remixproject/plugin-iframe](../iframe)
-- Plugin on a node child-process: [@remixproject/plugin-child-process](../child-process)
-- Plugin on an vscode extension or webview : [@remixproject/plugin-vscode](../vscode)
+- Plugin on an iframe: [@remix-project/plugin-iframe](../iframe)
+- Plugin on a node child-process: [@remix-project/plugin-child-process](../child-process)
+- Plugin on an vscode extension or webview : [@remix-project/plugin-vscode](../vscode)
 
 ## API
 
@@ -28,12 +28,12 @@ If you want to create a plugin in an existing envrionment, use the specific libr
 
 Installation :
 ```bash
-npm install @remixproject/plugin-iframe
+npm install @remix-project/plugin-iframe
 ```
 
 or with a unpkg :
 ```html
-<script src="https://unpkg.com/@remixproject/plugin"></script>
+<script src="https://unpkg.com/@remix-project/plugin"></script>
 ```
 
 ### Plugin Client
@@ -41,7 +41,7 @@ The plugin client is how you connect your plugin to remix.
 
 To import ( the ES6 way) with NPM use:
 ```javascript
-import { createClient } from '@remixproject/plugin'
+import { createClient } from '@remix-project/plugin'
 const client = createClient()
 ```
 Or if you are using unpkg use:
@@ -117,13 +117,13 @@ const client = createClient({ customTheme: true })
 ```
 
 #### Custom Api
-By default `@remixproject/plugin` will use remix IDE api.
+By default `@remix-project/plugin` will use remix IDE api.
 If you want to extends the API you can specify it in the `customApi` option.
 
 A good use case is when you want to use an external plugin not maintained by Remix team (3box plugin for example): 
 
 ```typescript
-import { remixProfiles, IRemixApi } from '@remixproject/plugin'
+import { remixProfiles, IRemixApi } from '@remix-project/plugin'
 interface ICustomApi extends IRemixApi {
   box: IBox;
 }

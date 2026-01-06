@@ -2,12 +2,12 @@
 
 This library provides connectors to connect a plugin to an engine that can load webview or iframes.
 ```
-npm install @remixproject/plugin-webview
+npm install @remix-project/plugin-webview
 ```
 
 If you do not expose any API you can create an instance like this :
 ```typescript
-import { createClient } from '@remixproject/plugin-webview'
+import { createClient } from '@remix-project/plugin-webview'
 
 const client = createClient()
 client.onload(async () => {
@@ -17,8 +17,8 @@ client.onload(async () => {
 
 If you need to expose an API to other plugin you need to extends the class: 
 ```typescript
-import { createClient } from '@remixproject/plugin-webview'
-import { PluginClient } from '@rexmixproject/plugin'
+import { createClient } from '@remix-project/plugin-webview'
+import { PluginClient } from '@remix-project/plugin'
 
 class MyPlugin extends PluginClient {
   methods = ['hello']

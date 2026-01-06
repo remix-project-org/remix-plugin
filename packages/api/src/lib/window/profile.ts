@@ -1,5 +1,5 @@
 import { IWindow } from './api'
-import { LibraryProfile } from '@remixproject/plugin-utils'
+import { LibraryProfile } from '@remix-project/plugin-utils'
 
 export const windowProfile: LibraryProfile<IWindow> = {
   name: 'window',

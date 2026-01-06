@@ -1,10 +1,10 @@
 # Engine Web
 The web engine provides a connector for Iframe & Websocket.
-`npm install @remixproject/engine-web`
+`npm install @remix-project/engine-web`
 
 ## Iframe
 The iframe connector is used to load & connect a plugin inside an iframe.
-Iframe based plugin are webview using an `index.html` as entry point & need to use `@remixproject/plugin-iframe`.
+Iframe based plugin are webview using an `index.html` as entry point & need to use `@remix-project/plugin-iframe`.
 
 ```typescript
 const myPlugin = new IframePlugin({
@@ -22,7 +22,7 @@ const data = manager.call('my-plugin', 'getData');
 
 ## Websocket
 The websocket connector wraps the native [Websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) object from the Web API.
-Websocket based plugin are usually server with a Websocket connection open. Any library can be used, remixproject provide a wrapper around the `ws` library : `@remixproject/plugin-ws`.
+Websocket based plugin are usually server with a Websocket connection open. Any library can be used, remix-project provide a wrapper around the `ws` library : `@remix-project/plugin-ws`.
 
 ```typescript
 const myPlugin = new WebsocketOptions({

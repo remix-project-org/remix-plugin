@@ -1,8 +1,8 @@
 import { IUdapp } from './api'
-import { LibraryProfile } from '@remixproject/plugin-utils'
+import { LibraryProfile } from '@remix-project/plugin-utils'
 
 export const udappProfile: LibraryProfile<IUdapp> = {
   name: 'udapp',
-  methods: ['createVMAccount', 'getAccounts', 'sendTransaction'],
+  methods: ['createVMAccount', 'getAccounts', 'sendTransaction', 'getSettings', 'setEnvironmentMode'],
   events: ['newTransaction']
 }

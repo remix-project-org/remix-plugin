@@ -1,4 +1,4 @@
-import { StatusEvents } from '@remixproject/plugin-utils'
+import { StatusEvents } from '@remix-project/plugin-utils'
 
 export interface ISettings {
   events: {} & StatusEvents

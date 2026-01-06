@@ -1,6 +1,6 @@
 import { ChildProcessPlugin } from "../src"
-import { PluginManager, Engine } from "@remixproject/engine"
-import { pluginManagerProfile } from "@remixproject/plugin-api"
+import { PluginManager, Engine } from "@remix-project/engine"
+import { pluginManagerProfile } from "@remix-project/plugin-api"
 import { fork } from 'child_process'
 
 

@@ -2,14 +2,14 @@
 
 ## Install
 ```bash
-npm install @remixproject/engine@next
+npm install @remix-project/engine@next
 ```
 
 ## Create your connector
 Create a file `index.ts`
 
 ```typescript
-import { PluginConnector, Profile, ExternalProfile, Message } from '@remixproject/engine'
+import { PluginConnector, Profile, ExternalProfile, Message } from '@remix-project/engine'
 import io from 'socket.io-client';
 
 export class SocketIOPlugin extends PluginConnector {
@@ -50,7 +50,7 @@ npx tsc index --declaration
   "main": "index.js",
   "types": "index.d.ts",
   "peerDependencies": {
-    "@remixproject/engine": "next",
+    "@remix-project/engine": "next",
     "socket.io-client": "^2.3.0"
   }
 }
@@ -69,12 +69,12 @@ Here is how to use your plugin connector in an engine :
 
 ## Install
 ```
-npm install @remixproject/engine@next plugin-connector-socket.io socket.io-client
+npm install @remix-project/engine@next plugin-connector-socket.io socket.io-client
 ```
 
 ## Create a client
 ```typescript
-import { PluginManager, Engine, Plugin } from '@remixproject/engine'
+import { PluginManager, Engine, Plugin } from '@remix-project/engine'
 import { SocketIOPlugin } from 'plugin-connector-socket.io'
 
 const manager = new PluginManager()

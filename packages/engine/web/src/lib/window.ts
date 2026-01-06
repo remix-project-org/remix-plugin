@@ -1,6 +1,6 @@
-import { Plugin, PluginOptions } from '@remixproject/engine'
-import { IWindow, windowProfile } from '@remixproject/plugin-api'
-import { MethodApi } from '@remixproject/plugin-utils';
+import { Plugin } from '@remix-project/engine'
+import { IWindow, windowProfile } from '@remix-project/plugin-api'
+import { MethodApi, PluginOptions } from '@remix-project/plugin-utils';
 
 export class WindowPlugin extends Plugin implements MethodApi<IWindow> {
 

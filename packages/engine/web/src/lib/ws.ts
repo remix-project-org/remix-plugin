@@ -1,5 +1,5 @@
-import type { Message, Profile, ExternalProfile } from '@remixproject/plugin-utils'
-import { PluginConnector, PluginConnectorOptions } from '@remixproject/engine'
+import type { Message, Profile, ExternalProfile } from '@remix-project/plugin-utils'
+import { PluginConnector, PluginConnectorOptions } from '@remix-project/engine'
 
 export interface WebsocketOptions extends PluginConnectorOptions {
   /** Time (in ms) to wait before reconnection after connection closed */
@@ -27,8 +27,12 @@ export class WebsocketPlugin extends PluginConnector {
   }
 
   private async getEvent(event: MessageEvent) {
-    const message: Message = JSON.parse(event.data)
-    this.getMessage(message)
+    try {
+      const message: Message = JSON.parse(event.data)
+      this.getMessage(message)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
 

@@ -1,6 +1,6 @@
 {
   "name": "remix-plugin",
-  "version": "0.3.1",
+  "version": "0.3.44",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -28,15 +28,10 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+    "help": "nx help"
   },
   "private": true,
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1001.3",
-    "@angular/compiler-cli": "^10.1.0",
-    "@angular/language-service": "^10.1.0",
-    "@nrwl/angular": "^10.3.0",
     "@nrwl/cli": "10.3.0",
     "@nrwl/cypress": "10.3.0",
     "@nrwl/eslint-plugin-nx": "10.3.0",
@@ -44,20 +39,19 @@
     "@nrwl/node": "10.3.0",
     "@nrwl/web": "10.3.0",
     "@nrwl/workspace": "10.3.0",
+    "@types/electron": "^1.6.10",
     "@types/events": "^3.0.0",
     "@types/jest": "26.0.8",
     "@types/node": "^14.0.23",
     "@types/vscode": "^1.47.0",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
-    "codelyzer": "~5.0.1",
     "cypress": "^4.1.0",
     "dotenv": "6.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-cypress": "^2.10.3",
     "jest": "26.2.2",
-    "jest-preset-angular": "8.3.1",
     "lerna": "^3.22.1",
     "prettier": "2.0.4",
     "ts-jest": "26.4.0",
@@ -66,17 +60,9 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {
-    "@angular/animations": "^10.1.0",
-    "@angular/cdk": "^10.2.6",
-    "@angular/common": "^10.1.0",
-    "@angular/compiler": "^10.1.0",
-    "@angular/core": "^10.1.0",
-    "@angular/forms": "^10.1.0",
-    "@angular/material": "^10.2.6",
-    "@angular/platform-browser": "^10.1.0",
-    "@angular/platform-browser-dynamic": "^10.1.0",
-    "@angular/router": "^10.1.0",
-    "rxjs": "~6.5.5",
-    "zone.js": "^0.10.2"
-  }
+    "@remix-project/remix-url-resolver": "latest",
+    "axios": "^0.21.1",
+    "rxjs": "~6.5.5"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

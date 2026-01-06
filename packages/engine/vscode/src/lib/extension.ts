@@ -1,6 +1,6 @@
 // Check here : https://code.visualstudio.com/api/references/vscode-api#extensions
-import { PluginConnector } from "@remixproject/engine"
-import { Profile, ExternalProfile, Message } from '@remixproject/plugin-utils'
+import { PluginConnector } from "@remix-project/engine"
+import { Profile, ExternalProfile, Message } from '@remix-project/plugin-utils'
 import { extensions, Extension } from 'vscode'
 
 export class ExtensionPlugin extends PluginConnector {

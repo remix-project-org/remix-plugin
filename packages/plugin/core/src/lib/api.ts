@@ -1,4 +1,4 @@
-import type { Profile, Api, MethodApi, CustomApi, ProfileMap, ApiMapFromProfileMap, PluginApi, ApiMap } from '@remixproject/plugin-utils'
+import type { Profile, Api, MethodApi, CustomApi, ProfileMap, ApiMapFromProfileMap, PluginApi, ApiMap } from '@remix-project/plugin-utils'
 import { PluginClient } from './client'
 
 /**

@@ -1,6 +1,6 @@
-import type { Message, Api, ApiMap, PluginApi } from '@remixproject/plugin-utils'
-import type { IRemixApi } from '@remixproject/plugin-api';
-import { listenEvent, callEvent, getMethodPath } from '@remixproject/plugin-utils'
+import type { Message, Api, ApiMap, PluginApi } from '@remix-project/plugin-utils'
+import type { IRemixApi } from '@remix-project/plugin-api';
+import { listenEvent, callEvent, getMethodPath } from '@remix-project/plugin-utils'
 import { PluginClient } from './client'
 import { createApi } from './api'
 
